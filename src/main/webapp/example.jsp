@@ -1,27 +1,45 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: paulgarcia
-  Date: 5/2/23
-  Time: 9:41 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%! int counter = 0; %>
-<% counter += 1; %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>JSTL Example</title>
 </head>
 <body>
-<%@ include file="./webapp/navbar.jsp"%>
-<h1>The current count is <%= counter %>.</h1>
+<h1>Your Shopping Cart</h1>
 
-View the page source!
+<c:choose>
 
-<%-- this is a JSP comment, you will *not* see this in the html --%>
+<c:when test="${cart.isEmpty()}">
+    <h2>No items in your cart (yet).</h2>
+</c:when>
 
-<!-- this is an HTML comment, you *will* see this in the html -->
+<c:otherwise>
+<c:forEach var="item" items="${cart.items}">
+<div class="item">
+    <h3>${item.name}</h3>
+    <p>${item.description}</p>
+    <p>${item.price}</p>
+    <c:if test="${item.isOnSale}">
+    <p>This item is on sale!</p>
+    </c:if>
+    </item>
+    </c:forEach>
+    </c:otherwise>
+
+    </c:choose>
+
+    <c:choose>
+    <c:when test="${boolean_expression_1}">
+    <p>boolean_expression_1 was true</p>
+    </c:when>
+    <c:when test="${boolean_expression_2}">
+    <p>boolean_expression_1 was false, and boolean_expression_2 was true</p>
+    </c:when>
+    <c:otherwise>
+    <p>none of the above tests were true</p>
+    </c:otherwise>
+    </c:choose>
+
 
 </body>
 </html>
-
